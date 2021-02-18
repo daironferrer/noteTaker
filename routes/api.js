@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const fs = require('fs');
 const path = require('path');
+const uuidv1 = require('uuid');
 
 // Renders Notes
 router.get('/notes', function (req, res) {
@@ -13,7 +14,7 @@ router.get('/notes', function (req, res) {
 router.post('/notes', function(req, res) {
     const title = req.body.title;
     const text = req.body.text;
-    const newNote = {title, text};
+    const newNote = {title, text, id:uuidv1()};
     const notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
 
     // Pushes note
